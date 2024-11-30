@@ -1,0 +1,103 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define ld long double
+#define str string
+#define vi vector<int>
+#define vll vector<long long>
+#define vc vector<char>
+#define vs vector<string>
+#define pi pair<int, int>
+#define vpi vector<pi>
+#define vvi vector<vector<int>>
+#define si set<int>
+#define ins insert
+#define pb(a) push_back(a)
+#define all(v) v.begin(), v.end()
+#define rall(v) v.rbegin(), v.rend()
+#define rep(i, b) for (int i = 0; i < (b); i++)
+#define fast_io                       \
+    ios_base::sync_with_stdio(false); \
+    std::cin.tie(NULL)
+using namespace std;
+
+ll N = 1000000;
+vll primes;
+vll v(N, 1);
+void sieve()
+{
+    v[0] == 0;
+    v[1] == 0;
+    ll maxN = N;
+    for (int i = 2; i * i <= maxN; i++)
+    {
+        if (v[i] == 1)
+        {
+            for (int j = i * i; j <= maxN; j += i)
+                v[j] = 0;
+        }
+    }
+    for (int i = 2; i <= maxN; i++)
+    {
+        if (v[i] != 0)
+        {
+            primes.pb(i);
+        }
+    }
+}
+int factorial(int n)
+{
+    if (n == 0)
+        return 1;
+    return n * factorial(n - 1);
+}
+bool isPrime(ll n)
+{
+    if (n <= 1)
+        return false;
+    for (ll i = 2; i * i <= n; i++)
+    {
+        if (n % i == 0)
+            return false;
+    }
+    return true;
+}
+void solve()
+{
+    int n, m, k;
+    cin >> n >> m >> k;
+    str s;
+    cin >> s;
+    int cnt = 0, cnt0 = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == '0')
+        {
+            cnt0++;
+        }
+        else
+        {
+            cnt0 = 0;
+        }
+        if (cnt0 == m)
+        {
+            cnt++;
+            cnt0 = 0;
+            if (k > 1)
+                i += k - 1;
+        }
+    }
+    cout << cnt << '\n';
+}
+
+int main()
+{
+    fast_io;
+    ll t;
+    cin >> t;
+    // t = 1;
+    while (t--)
+    {
+        solve();
+    }
+    return 0;
+}
